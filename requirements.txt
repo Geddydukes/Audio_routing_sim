@@ -1,0 +1,20 @@
+# Core runtime dependencies for AERS
+
+numpy>=1.26.0
+PyYAML>=6.0
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+starlette>=0.37.0
+
+# Audio and analysis
+soundfile>=0.13.0
+librosa>=0.10.1
+sounddevice>=0.4.6
+scipy>=1.11.0
+
+# Websocket / dashboard integration (FastAPI already pulls starlette)
+python-multipart>=0.0.9
+
+# Security utilities
+cryptography>=42.0.0
+

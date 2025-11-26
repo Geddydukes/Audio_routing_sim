@@ -1,0 +1,27 @@
+# Real-time microphone to speaker routing
+sample_rate: 48000
+frame_size: 512  # Smaller buffer for lower latency
+
+nodes:
+  - id: mic_input
+    kind: audio_input
+    params:
+      channels: 2
+
+  - id: gain_control
+    kind: gain
+    params:
+      gain_db: 0.0  # Adjust as needed
+      channels: 2
+
+  - id: speaker_output
+    kind: audio_output
+    params:
+      channels: 2
+
+connections:
+  - from: mic_input
+    to: gain_control
+  - from: gain_control
+    to: speaker_output
+

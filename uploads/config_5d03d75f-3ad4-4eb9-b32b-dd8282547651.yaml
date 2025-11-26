@@ -1,0 +1,17 @@
+connections:
+- from: source1
+  to: bus_main
+frame_size: 2048
+nodes:
+- id: source1
+  kind: audio_file
+  params:
+    channels: 2
+    file_path: /Users/geddydukes/Desktop/audio_ml/Audio_routing_sim/uploads/5d03d75f-3ad4-4eb9-b32b-dd8282547651.mp3
+    loop: true
+- id: bus_main
+  kind: gain
+  params:
+    channels: 2
+    gain_db: -3.0
+sample_rate: 48000

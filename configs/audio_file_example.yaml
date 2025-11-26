@@ -1,0 +1,29 @@
+# Example config using audio file input
+sample_rate: 48000
+frame_size: 1024
+
+nodes:
+  - id: file_source
+    kind: audio_file
+    params:
+      file_path: "path/to/your/audio.wav"  # Replace with actual audio file path
+      loop: true
+      channels: 2
+
+  - id: bus_main
+    kind: gain
+    params:
+      gain_db: -3.0
+      channels: 2
+
+  - id: output
+    kind: audio_output
+    params:
+      channels: 2
+
+connections:
+  - from: file_source
+    to: bus_main
+  - from: bus_main
+    to: output
+

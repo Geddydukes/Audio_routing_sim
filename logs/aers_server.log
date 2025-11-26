@@ -1,0 +1,131 @@
+2025-11-26 13:21:29 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:22:09 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:22:09 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:22:09 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:22:09 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:22:09 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:22:38 [INFO] aers.ui.server: ✅ Audio uploaded: g_boink.mp3
+2025-11-26 13:22:38 [INFO] aers.ui.server:    Config: uploads/config_e5e750ad-a693-4bf9-af6d-24f836343b98.yaml
+2025-11-26 13:22:38 [INFO] aers.ui.server:    Source node: source1
+2025-11-26 13:22:38 [INFO] aers.ui.server:    Nodes: ['source1', 'bus_main']
+2025-11-26 13:22:38 [INFO] aers.ui.server: 🔄 Loading config: uploads/config_e5e750ad-a693-4bf9-af6d-24f836343b98.yaml
+2025-11-26 13:22:38 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:22:38 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:22:38 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:24:17 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:24:17 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:24:17 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:24:17 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:24:17 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:24:20 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:24:20 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:24:20 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:24:20 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:24:20 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:24:23 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:24:23 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:24:23 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:24:23 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:24:23 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:24:26 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:24:26 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:24:26 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:24:26 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:24:26 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:25:03 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:25:15 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:25:15 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:25:15 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:25:15 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:25:15 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:25:25 [INFO] aers.ui.server: ✅ Audio uploaded: g_boink.mp3
+2025-11-26 13:25:25 [INFO] aers.ui.server:    Config: uploads/config_5d03d75f-3ad4-4eb9-b32b-dd8282547651.yaml
+2025-11-26 13:25:25 [INFO] aers.ui.server:    Source node: source1
+2025-11-26 13:25:25 [INFO] aers.ui.server:    Nodes: ['source1', 'bus_main']
+2025-11-26 13:25:25 [INFO] aers.ui.server: 🔄 Loading config: uploads/config_5d03d75f-3ad4-4eb9-b32b-dd8282547651.yaml
+2025-11-26 13:25:25 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:25:25 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:25:25 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:26:42 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:26:42 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:26:42 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:26:42 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:26:42 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:27:57 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:27:57 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:27:57 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:27:57 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:27:57 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:27:59 [INFO] aers.ui.server: ✅ Audio uploaded: g_boink.mp3
+2025-11-26 13:27:59 [INFO] aers.ui.server:    Config: uploads/config_0998ad02-9fcd-402b-a80f-16a897db093b.yaml
+2025-11-26 13:27:59 [INFO] aers.ui.server:    Source node: source1
+2025-11-26 13:27:59 [INFO] aers.ui.server:    Nodes: ['source1', 'bus_main']
+2025-11-26 13:27:59 [INFO] aers.ui.server: 🔄 Loading config: uploads/config_0998ad02-9fcd-402b-a80f-16a897db093b.yaml
+2025-11-26 13:27:59 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:28:00 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:28:00 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:30:07 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:30:07 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:30:07 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:30:07 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:30:07 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:30:10 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:30:10 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:30:10 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:30:10 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:30:10 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:30:13 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:30:13 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:30:13 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:30:13 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:30:13 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:30:56 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:31:18 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:31:18 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:31:18 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:31:18 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:31:18 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:33:54 [INFO] aers.ui.server: ✅ Audio uploaded: g_boink.mp3
+2025-11-26 13:33:54 [INFO] aers.ui.server:    Config: uploads/config_c6c97a69-baff-4bd8-bb55-911d3154644f.yaml
+2025-11-26 13:33:54 [INFO] aers.ui.server:    Source node: source1
+2025-11-26 13:33:54 [INFO] aers.ui.server:    Nodes: ['source1', 'bus_main']
+2025-11-26 13:33:54 [INFO] aers.ui.server: 🔄 Loading config: uploads/config_c6c97a69-baff-4bd8-bb55-911d3154644f.yaml
+2025-11-26 13:33:54 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:33:55 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:33:55 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:35:46 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:35:46 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:35:46 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:35:46 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:35:46 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:35:46 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:35:46 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:35:46 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:35:46 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:35:46 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:35:50 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:35:50 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:35:50 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:35:50 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:35:50 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:35:50 [INFO] aers.ui.server: Logging to console and file: logs/aers_server.log
+2025-11-26 13:35:50 [INFO] aers.ui.server: 🔄 Loading config: configs/simple_routing.yaml
+2025-11-26 13:35:50 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:35:50 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:35:50 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:36:53 [INFO] aers.ui.server: ✅ Audio uploaded: g_boink.mp3
+2025-11-26 13:36:53 [INFO] aers.ui.server:    Config: uploads/config_eadc6c38-981d-4010-9f9a-a90a9fe9a89e.yaml
+2025-11-26 13:36:53 [INFO] aers.ui.server:    Source node: source1
+2025-11-26 13:36:53 [INFO] aers.ui.server:    Nodes: ['source1', 'bus_main']
+2025-11-26 13:36:53 [INFO] aers.ui.server: 🔄 Loading config: uploads/config_eadc6c38-981d-4010-9f9a-a90a9fe9a89e.yaml
+2025-11-26 13:36:53 [INFO] aers.ui.server: ✅ Config loaded: 2 nodes, 1 connections
+2025-11-26 13:36:54 [INFO] aers.ui.server: ✅ Engine created: ['source1', 'bus_main']
+2025-11-26 13:36:54 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)
+2025-11-26 13:38:15 [INFO] aers.ui.server: ✅ Audio uploaded: g_boink.mp3
+2025-11-26 13:38:15 [INFO] aers.ui.server:    Config: uploads/config_8d61e975-2eff-4bee-8b29-641b330fab3f.yaml
+2025-11-26 13:38:15 [INFO] aers.ui.server:    Source node: uploaded_audio
+2025-11-26 13:38:15 [INFO] aers.ui.server:    Nodes: ['uploaded_audio', 'source1', 'bus_main']
+2025-11-26 13:38:15 [INFO] aers.ui.server: 🔄 Loading config: uploads/config_8d61e975-2eff-4bee-8b29-641b330fab3f.yaml
+2025-11-26 13:38:15 [INFO] aers.ui.server: ✅ Config loaded: 3 nodes, 1 connections
+2025-11-26 13:38:15 [INFO] aers.ui.server: ✅ Engine created: ['uploaded_audio', 'source1', 'bus_main']
+2025-11-26 13:38:15 [INFO] aers.ui.server: 🔄 Starting simulation loop (block_size=2048, duration=0.0427s)

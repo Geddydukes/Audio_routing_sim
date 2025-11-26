@@ -1,0 +1,23 @@
+# configs/simple_routing.yaml
+
+sample_rate: 48000
+frame_size: 2048
+
+nodes:
+  - id: source1
+    kind: sine
+    params:
+      frequency_hz: 440.0
+      amplitude: 0.2
+      channels: 2
+
+  - id: bus_main
+    kind: gain
+    params:
+      gain_db: -3.0
+      channels: 2
+
+connections:
+  - from: source1
+    to: bus_main
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>AERS Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="aers-header">
+      <h1>AERS – Audio Event Routing Simulator</h1>
+      <p class="subtitle">Real-time node metrics</p>
+    </header>
+
+    <main class="aers-main">
+      <section class="panel">
+        <h2>WebSocket Status</h2>
+        <div id="ws-status" class="status status-disconnected">
+          Disconnected
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Upload Audio</h2>
+        <div class="upload-section">
+          <input
+            type="file"
+            id="audio-file-input"
+            accept=".wav,.flac,.mp3,.ogg,.m4a,.aac"
+            style="display: none"
+          />
+          <button id="upload-btn" class="upload-button">Choose Audio File</button>
+          <div id="upload-status" class="upload-status"></div>
+          
+          <!-- Audio playback controls -->
+          <div id="audio-controls" class="audio-controls" style="display: none;">
+            <button id="mute-btn" class="mute-button">🔊 Mute</button>
+            <audio id="audio-player" loop autoplay></audio>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Node Levels</h2>
+        <div id="nodes-container" class="nodes-container">
+          <!-- node cards injected here -->
+        </div>
+      </section>
+
+      <section class="panel" id="timeline-panel" style="display: none;">
+        <h2>Audio Timeline</h2>
+        <!-- Global timeline visualization -->
+        <div id="global-timeline-container" class="global-timeline-container">
+          <canvas id="global-timeline-canvas" class="global-timeline-canvas"></canvas>
+          <div id="timeline-time-labels" class="timeline-time-labels"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="aers-footer">
+      <span id="last-update">Last update: —</span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+

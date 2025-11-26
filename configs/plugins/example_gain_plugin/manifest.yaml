@@ -1,0 +1,9 @@
+name: "example_gain_plugin"
+version: "1.0.0"
+module: "example_gain_plugin.gain"
+hash:
+  algorithm: "sha256"
+  value: "REPLACE_WITH_REAL_HASH"
+allowed_node_kinds:
+  - "gain"
+

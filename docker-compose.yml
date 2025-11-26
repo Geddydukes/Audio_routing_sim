@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  aers-api:
+    build: .
+    container_name: aers-api
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./configs:/app/configs:ro
+      - ./plugins:/app/plugins:ro
+    restart: unless-stopped
+
+  aers-dashboard:
+    image: python:3.11-slim
+    working_dir: /ui
+    volumes:
+      - ./ui/dashboard:/ui:ro
+    command: ["python", "-m", "http.server", "4173"]
+    ports:
+      - "4173:4173"
+    restart: unless-stopped
+
