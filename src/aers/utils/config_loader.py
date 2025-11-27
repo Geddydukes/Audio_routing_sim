@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import List, Any, Dict
+from dataclasses import dataclass, field
+from typing import List, Any, Dict, Tuple
 
 import yaml
 
@@ -14,6 +14,7 @@ class RoutingConfig:
     frame_size: int
     node_specs: List[Dict[str, Any]]
     connections: List[Connection]
+    node_positions: Dict[str, Tuple[float, float]] = field(default_factory=dict)
 
 
 def load_routing_config(path: str) -> RoutingConfig:
@@ -63,11 +64,23 @@ def load_routing_config(path: str) -> RoutingConfig:
         except KeyError as e:
             raise ValueError(f"Connection entry missing key: {e}") from e
         connections.append(Connection(src=src, dst=dst))
+    
+    # Load node positions if present
+    node_positions: Dict[str, Tuple[float, float]] = {}
+    for node_spec in node_specs:
+        node_id = node_spec.get("id")
+        if node_id and "position" in node_spec:
+            pos = node_spec["position"]
+            if isinstance(pos, dict):
+                node_positions[node_id] = (float(pos.get("x", 0)), float(pos.get("y", 0)))
+            elif isinstance(pos, (list, tuple)) and len(pos) >= 2:
+                node_positions[node_id] = (float(pos[0]), float(pos[1]))
 
     return RoutingConfig(
         sample_rate=sample_rate,
         frame_size=frame_size,
         node_specs=node_specs,
         connections=connections,
+        node_positions=node_positions,
     )
 

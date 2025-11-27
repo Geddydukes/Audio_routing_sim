@@ -35,6 +35,7 @@ class GraphEngine:
         node_specs: List[dict],
         connections: List[Connection],
         default_channels: int = 2,
+        node_positions: Optional[Dict[str, Tuple[float, float]]] = None,
     ) -> None:
         self.sample_rate = int(sample_rate)
         self.frame_size = int(frame_size)
@@ -42,6 +43,8 @@ class GraphEngine:
 
         self._nodes: Dict[str, BaseNode] = {}
         self._connections: List[Connection] = connections
+        self._node_positions: Dict[str, Tuple[float, float]] = node_positions or {}
+        self._layout_version: int = 0
 
         self._build_nodes(node_specs)
         self._validate()
@@ -182,3 +185,57 @@ class GraphEngine:
     @property
     def execution_order(self) -> List[str]:
         return list(self._execution_order)
+    
+    def set_node_position(self, node_id: str, x: float, y: float) -> None:
+        """Update node position in layout."""
+        if node_id not in self._nodes:
+            raise ValueError(f"Node '{node_id}' not found")
+        self._node_positions[node_id] = (float(x), float(y))
+        self._layout_version += 1
+    
+    def get_node_position(self, node_id: str) -> Tuple[float, float]:
+        """Get node position, defaulting to (0, 0) if not set."""
+        return self._node_positions.get(node_id, (0.0, 0.0))
+    
+    def get_graph_state(self) -> Dict[str, any]:
+        """Get complete graph state including layout for visualization."""
+        from aers.modules import NODE_TYPE_REGISTRY
+        
+        # Map node classes to kind names
+        kind_map = {}
+        for k, v in NODE_TYPE_REGISTRY.items():
+            kind_map[v] = k
+        
+        nodes = []
+        for node_id, node in self._nodes.items():
+            node_type = type(node)
+            kind = "unknown"
+            
+            # Check if node type is in registry
+            if node_type in kind_map:
+                kind = kind_map[node_type]
+            else:
+                # Try to match by class name
+                for cls, k in kind_map.items():
+                    if node_type == cls:
+                        kind = k
+                        break
+            
+            pos = self.get_node_position(node_id)
+            nodes.append({
+                "id": node_id,
+                "name": node.name,
+                "kind": kind,
+                "position": {"x": pos[0], "y": pos[1]},
+            })
+        
+        connections = [
+            {"from": conn.src, "to": conn.dst}
+            for conn in self._connections
+        ]
+        
+        return {
+            "nodes": nodes,
+            "connections": connections,
+            "layout_version": self._layout_version,
+        }

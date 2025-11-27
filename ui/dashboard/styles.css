@@ -29,10 +29,63 @@ body {
 }
 
 .aers-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem 2rem 2rem;
+  min-height: calc(100vh - 150px);
+}
+
+.tabs-container {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  background-color: #1f2937;
+  color: #9ca3af;
+  border: 1px solid #374151;
+  border-radius: 0.5rem 0.5rem 0 0;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  background-color: #374151;
+  color: #f9fafb;
+}
+
+.tab-btn.active {
+  background-color: #030712;
+  color: #4CAF50;
+  border-bottom-color: #030712;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
   display: grid;
   grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
   gap: 1rem;
-  padding: 1.25rem 2rem 2rem;
+}
+
+#graph-tab {
+  display: none;
+}
+
+#graph-tab.active {
+  display: block;
+  grid-template-columns: none;
 }
 
 .panel {
@@ -178,6 +231,160 @@ body {
 
 .mute-button:hover {
   background-color: #374151;
+}
+
+/* Graph Editor Styles */
+.graph-editor-container {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1rem;
+  height: calc(100vh - 250px);
+  min-height: 600px;
+  width: 100%;
+}
+
+.node-palette {
+  background-color: #030712;
+  border: 1px solid #1f2937;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.node-palette h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  color: #f9fafb;
+}
+
+.palette-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 0.375rem;
+  cursor: grab;
+  user-select: none;
+  transition: all 0.2s;
+}
+
+.palette-item:hover {
+  background-color: #374151;
+  border-color: #4CAF50;
+}
+
+.palette-item:active {
+  cursor: grabbing;
+}
+
+.palette-icon {
+  font-size: 1.2rem;
+}
+
+.palette-label {
+  font-size: 0.9rem;
+  color: #f9fafb;
+}
+
+.graph-canvas-wrapper {
+  position: relative;
+  background-color: #020617;
+  border: 1px solid #1f2937;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  min-height: 600px;
+  height: calc(100vh - 250px);
+}
+
+#graph-canvas {
+  width: 100%;
+  height: 100%;
+  cursor: default;
+}
+
+.graph-node {
+  cursor: move;
+}
+
+.node-box {
+  fill: #1f2937;
+  stroke: #4CAF50;
+  stroke-width: 2;
+  transition: all 0.2s;
+}
+
+.graph-node:hover .node-box {
+  fill: #374151;
+  stroke: #66BB6A;
+}
+
+.node-label {
+  fill: #f9fafb;
+  font-size: 14px;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.node-kind {
+  fill: #9ca3af;
+  font-size: 11px;
+  pointer-events: none;
+}
+
+.port {
+  fill: #6b7280;
+  stroke: #374151;
+  stroke-width: 1;
+  cursor: crosshair;
+  transition: all 0.2s;
+}
+
+.port:hover {
+  fill: #4CAF50;
+  stroke: #66BB6A;
+  r: 8;
+}
+
+.connection-line {
+  stroke: #4CAF50;
+  stroke-width: 2;
+  fill: none;
+  marker-end: url(#arrowhead);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.connection-line:hover {
+  stroke: #66BB6A;
+  stroke-width: 3;
+}
+
+.graph-controls-overlay {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.graph-btn {
+  padding: 0.5rem 1rem;
+  background-color: #1f2937;
+  color: #f9fafb;
+  border: 1px solid #374151;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.graph-btn:hover {
+  background-color: #374151;
+  border-color: #4CAF50;
 }
 
 .level-bar {

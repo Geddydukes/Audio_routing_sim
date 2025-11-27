@@ -9,7 +9,7 @@ import uuid
 from pathlib import Path
 from typing import Dict, Set, Optional
 
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, UploadFile, File, HTTPException
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, UploadFile, File, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
 
@@ -130,6 +130,7 @@ async def _simulation_loop(
             node_specs=routing_config.node_specs,
             connections=routing_config.connections,
             default_channels=2,
+            node_positions=routing_config.node_positions,
         )
         
         logger.info(f"✅ Engine created: {list(engine.nodes.keys())}")
@@ -419,4 +420,312 @@ async def get_status() -> JSONResponse:
     }
     
     return JSONResponse(status)
+
+
+# Graph Editor API Endpoints
+@app.get("/api/graph/current")
+async def get_current_graph() -> JSONResponse:
+    """Get current graph state with positions for visualization."""
+    global _current_engine
+    if not _current_engine:
+        return JSONResponse({"nodes": [], "connections": [], "layout_version": 0})
+    return JSONResponse(_current_engine.get_graph_state())
+
+
+@app.post("/api/graph/nodes")
+async def add_node(request: Request) -> JSONResponse:
+    """Add a new node to the graph."""
+    global _simulation_task, _current_config_path, _current_engine
+    
+    try:
+        data = await request.json()
+        node_id = data.get("id")
+        node_kind = data.get("kind")
+        x = float(data.get("x", 0))
+        y = float(data.get("y", 0))
+        params = data.get("params", {})
+        
+        if not node_id or not node_kind:
+            raise HTTPException(400, "Missing 'id' or 'kind'")
+        
+        # Load current config
+        current_config = load_routing_config(_current_config_path)
+        
+        # Check if node already exists
+        existing_ids = {n.get("id") for n in current_config.node_specs}
+        if node_id in existing_ids:
+            raise HTTPException(400, f"Node '{node_id}' already exists")
+        
+        # Add new node spec
+        new_node_spec = {
+            "id": node_id,
+            "kind": node_kind,
+            "params": params,
+            "position": {"x": x, "y": y},
+        }
+        
+        new_node_specs = list(current_config.node_specs) + [new_node_spec]
+        
+        # Save updated config
+        import yaml
+        temp_config_path = Path(_current_config_path).parent / f"graph_edit_{uuid.uuid4().hex[:8]}.yaml"
+        
+        connections_dict = [
+            {"from": conn.src, "to": conn.dst}
+            for conn in current_config.connections
+        ]
+        
+        with open(temp_config_path, "w") as f:
+            yaml.dump({
+                "sample_rate": current_config.sample_rate,
+                "frame_size": current_config.frame_size,
+                "nodes": new_node_specs,
+                "connections": connections_dict,
+            }, f)
+        
+        # Restart simulation
+        if _simulation_task:
+            _simulation_task.cancel()
+            try:
+                await _simulation_task
+            except asyncio.CancelledError:
+                pass
+            await asyncio.sleep(0.1)
+        
+        _simulation_task = asyncio.create_task(
+            _simulation_loop(config_path=str(temp_config_path))
+        )
+        _current_config_path = str(temp_config_path)
+        
+        logger.info(f"✅ Node added: {node_id} ({node_kind})")
+        
+        return JSONResponse({"success": True, "node_id": node_id})
+    except Exception as e:
+        logger.error(f"Failed to add node: {e}", exc_info=True)
+        raise HTTPException(500, detail=str(e))
+
+
+@app.delete("/api/graph/nodes/{node_id}")
+async def remove_node(node_id: str) -> JSONResponse:
+    """Remove a node from the graph."""
+    global _simulation_task, _current_config_path
+    
+    try:
+        current_config = load_routing_config(_current_config_path)
+        
+        # Remove node
+        new_node_specs = [n for n in current_config.node_specs if n.get("id") != node_id]
+        
+        if len(new_node_specs) == len(current_config.node_specs):
+            raise HTTPException(404, f"Node '{node_id}' not found")
+        
+        # Remove connections involving this node
+        new_connections = [
+            conn for conn in current_config.connections
+            if conn.src != node_id and conn.dst != node_id
+        ]
+        
+        # Save updated config
+        import yaml
+        temp_config_path = Path(_current_config_path).parent / f"graph_edit_{uuid.uuid4().hex[:8]}.yaml"
+        
+        connections_dict = [
+            {"from": conn.src, "to": conn.dst}
+            for conn in new_connections
+        ]
+        
+        with open(temp_config_path, "w") as f:
+            yaml.dump({
+                "sample_rate": current_config.sample_rate,
+                "frame_size": current_config.frame_size,
+                "nodes": new_node_specs,
+                "connections": connections_dict,
+            }, f)
+        
+        # Restart simulation
+        if _simulation_task:
+            _simulation_task.cancel()
+            try:
+                await _simulation_task
+            except asyncio.CancelledError:
+                pass
+            await asyncio.sleep(0.1)
+        
+        _simulation_task = asyncio.create_task(
+            _simulation_loop(config_path=str(temp_config_path))
+        )
+        _current_config_path = str(temp_config_path)
+        
+        logger.info(f"✅ Node removed: {node_id}")
+        
+        return JSONResponse({"success": True})
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to remove node: {e}", exc_info=True)
+        raise HTTPException(500, detail=str(e))
+
+
+@app.post("/api/graph/connections")
+async def add_connection(request: Request) -> JSONResponse:
+    """Add a connection between nodes."""
+    global _simulation_task, _current_config_path
+    
+    try:
+        data = await request.json()
+        src = data.get("from")
+        dst = data.get("to")
+        
+        if not src or not dst:
+            raise HTTPException(400, "Missing 'from' or 'to'")
+        
+        if src == dst:
+            raise HTTPException(400, "Cannot connect node to itself")
+        
+        current_config = load_routing_config(_current_config_path)
+        
+        # Check nodes exist
+        node_ids = {n.get("id") for n in current_config.node_specs}
+        if src not in node_ids:
+            raise HTTPException(404, f"Source node '{src}' not found")
+        if dst not in node_ids:
+            raise HTTPException(404, f"Destination node '{dst}' not found")
+        
+        # Check connection doesn't already exist
+        from aers.core.graph_engine import Connection
+        new_conn = Connection(src=src, dst=dst)
+        if new_conn in current_config.connections:
+            raise HTTPException(400, "Connection already exists")
+        
+        # Check for cycles (would be caught by GraphEngine, but check early)
+        new_connections = list(current_config.connections) + [new_conn]
+        
+        # Save updated config
+        import yaml
+        temp_config_path = Path(_current_config_path).parent / f"graph_edit_{uuid.uuid4().hex[:8]}.yaml"
+        
+        connections_dict = [
+            {"from": conn.src, "to": conn.dst}
+            for conn in new_connections
+        ]
+        
+        with open(temp_config_path, "w") as f:
+            yaml.dump({
+                "sample_rate": current_config.sample_rate,
+                "frame_size": current_config.frame_size,
+                "nodes": current_config.node_specs,
+                "connections": connections_dict,
+            }, f)
+        
+        # Restart simulation (will validate DAG)
+        if _simulation_task:
+            _simulation_task.cancel()
+            try:
+                await _simulation_task
+            except asyncio.CancelledError:
+                pass
+            await asyncio.sleep(0.1)
+        
+        _simulation_task = asyncio.create_task(
+            _simulation_loop(config_path=str(temp_config_path))
+        )
+        _current_config_path = str(temp_config_path)
+        
+        logger.info(f"✅ Connection added: {src} -> {dst}")
+        
+        return JSONResponse({"success": True})
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to add connection: {e}", exc_info=True)
+        # Check if it's a cycle error
+        if "cycle" in str(e).lower():
+            raise HTTPException(400, "Connection would create a cycle")
+        raise HTTPException(500, detail=str(e))
+
+
+@app.delete("/api/graph/connections")
+async def remove_connection(request: Request) -> JSONResponse:
+    """Remove a connection."""
+    global _simulation_task, _current_config_path
+    
+    try:
+        data = await request.json()
+        src = data.get("from")
+        dst = data.get("to")
+        
+        if not src or not dst:
+            raise HTTPException(400, "Missing 'from' or 'to'")
+        
+        current_config = load_routing_config(_current_config_path)
+        
+        from aers.core.graph_engine import Connection
+        target_conn = Connection(src=src, dst=dst)
+        
+        if target_conn not in current_config.connections:
+            raise HTTPException(404, "Connection not found")
+        
+        new_connections = [c for c in current_config.connections if c != target_conn]
+        
+        # Save updated config
+        import yaml
+        temp_config_path = Path(_current_config_path).parent / f"graph_edit_{uuid.uuid4().hex[:8]}.yaml"
+        
+        connections_dict = [
+            {"from": conn.src, "to": conn.dst}
+            for conn in new_connections
+        ]
+        
+        with open(temp_config_path, "w") as f:
+            yaml.dump({
+                "sample_rate": current_config.sample_rate,
+                "frame_size": current_config.frame_size,
+                "nodes": current_config.node_specs,
+                "connections": connections_dict,
+            }, f)
+        
+        # Restart simulation
+        if _simulation_task:
+            _simulation_task.cancel()
+            try:
+                await _simulation_task
+            except asyncio.CancelledError:
+                pass
+            await asyncio.sleep(0.1)
+        
+        _simulation_task = asyncio.create_task(
+            _simulation_loop(config_path=str(temp_config_path))
+        )
+        _current_config_path = str(temp_config_path)
+        
+        logger.info(f"✅ Connection removed: {src} -> {dst}")
+        
+        return JSONResponse({"success": True})
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to remove connection: {e}", exc_info=True)
+        raise HTTPException(500, detail=str(e))
+
+
+@app.put("/api/graph/layout")
+async def update_layout(request: Request) -> JSONResponse:
+    """Update node positions without restarting simulation."""
+    global _current_engine
+    
+    try:
+        data = await request.json()
+        positions = data.get("positions", {})
+        
+        if not _current_engine:
+            raise HTTPException(400, "No active graph")
+        
+        for node_id, pos in positions.items():
+            if node_id in _current_engine.nodes:
+                _current_engine.set_node_position(node_id, float(pos.get("x", 0)), float(pos.get("y", 0)))
+        
+        return JSONResponse({"success": True, "layout_version": _current_engine._layout_version})
+    except Exception as e:
+        logger.error(f"Failed to update layout: {e}", exc_info=True)
+        raise HTTPException(500, detail=str(e))
 
